@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",               
+    "module": "CommonJS",             
+    "moduleResolution": "node",      
+    "strict": true,                  
+    "esModuleInterop": true,       
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",               
+    "rootDir": "./",                   
+    "resolveJsonModule": true,
+    "types": ["node"]
+
+  },
+  "scripts": {
+  "build": "tsc",
+  "start": "node dist/Index.js",
+  "dev": "ts-node Index.ts"
+},
+  "include": ["**/*.ts"],                
+  "exclude": ["node_modules"]
+}

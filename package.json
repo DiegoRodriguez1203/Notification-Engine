@@ -1,0 +1,24 @@
+{
+  "name": "notification-limiter",
+  "version": "1.0.0",
+  "description": "A simple TypeScript project that limits notifications per user.",
+  "main": "dist/Index.js",
+  "type": "commonjs",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/Index.js",
+    "dev": "ts-node Index.ts"
+  },
+  "keywords": [
+    "typescript",
+    "notifications",
+    "rate-limiter",
+    "example"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^24.7.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
