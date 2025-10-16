@@ -8,27 +8,14 @@ class NotificationService {
         this.memory = memory;
         this.writer = writer;
     }
-    /**
-     * Sends a notification to a user if allowed by the validator.
-     * Persists the notification in memory and on disk.
-     */
-    send(type, userId, message, urgent = false) {
-        // Obtiene las notificaciones previas del usuario
+    async send(type, userId, message, urgent = false) {
         const userNotifications = this.memory.get(userId);
-        // Verifica si se puede enviar según las reglas del validador
-        const canSend = this.validator.canSend(userId, type, urgent, userNotifications);
-        if (!canSend) {
-            console.log(`Notificación ${type} a ${userId} bloqueada por el validador`);
+        if (!this.validator.canSend(type, urgent, userNotifications))
             return;
-        }
-        // Envía la notificación a través del gateway
         this.gateway.send(userId, message);
-        // Crea el registro de la notificación
         const record = { type, timestamp: Date.now() };
-        // Lo agrega a la memoria
         this.memory.add(userId, record);
-        // Persiste toda la memoria en el archivo
-        console.log(`Notificación ${type} enviada a ${userId}`);
+        await this.writer.addRecord(userId, record);
     }
 }
 exports.NotificationService = NotificationService;

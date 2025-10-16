@@ -36,32 +36,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.NotificationWriter = void 0;
 const fs = __importStar(require("fs/promises"));
 const path = __importStar(require("path"));
-/**
- * Handles persistent storage of notifications.
- * Stores notifications grouped by userId.
- */
 class NotificationWriter {
     constructor() {
         this.dir = path.join(__dirname, "../data");
         this.filePath = path.join(this.dir, "notifications.json");
+        this.lock = Promise.resolve();
     }
-    /**
-     * Writes the full FileRecords object to disk.
-     * @param records - All notifications grouped by userId
-     */
     async write(records) {
-        try {
-            await fs.mkdir(this.dir, { recursive: true });
-            await fs.writeFile(this.filePath, JSON.stringify(records, null, 2), "utf-8");
-        }
-        catch (error) {
-            console.error("Error writing notifications:", error);
-        }
+        await fs.mkdir(this.dir, { recursive: true });
+        await fs.writeFile(this.filePath, JSON.stringify(records, null, 2), "utf-8");
     }
-    /**
-     * Reads all notifications from disk.
-     * @returns Notifications grouped by userId
-     */
     async read() {
         try {
             const data = await fs.readFile(this.filePath, "utf-8");
@@ -70,6 +54,16 @@ class NotificationWriter {
         catch {
             return {};
         }
+    }
+    async addRecord(userId, record) {
+        this.lock = this.lock.then(async () => {
+            const data = await this.read();
+            if (!data[userId])
+                data[userId] = [];
+            data[userId].push(record);
+            await this.write(data);
+        });
+        return this.lock;
     }
 }
 exports.NotificationWriter = NotificationWriter;

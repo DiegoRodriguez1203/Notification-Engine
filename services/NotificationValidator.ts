@@ -1,9 +1,6 @@
 import { NotificationType, intervals, maxTotal24h } from "../config/Intervals";
+import { NotificationRecord, FileRecords } from "../interfaces/Record";
 
-interface NotificationRecord {
-  type: NotificationType;
-  timestamp: number;
-}
 
 export class NotificationValidator {
   private minutesToMs(minutes: number): number {
@@ -11,7 +8,6 @@ export class NotificationValidator {
   }
 
   canSend(
-    userId: string,
     type: NotificationType,
     urgent: boolean,
     userNotifications: NotificationRecord[]

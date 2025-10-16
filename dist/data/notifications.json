@@ -1,0 +1,40 @@
+{
+  "user1": [
+    {
+      "type": "info",
+      "timestamp": 1760617253817
+    },
+    {
+      "type": "info",
+      "timestamp": 1760617253818
+    },
+    {
+      "type": "info",
+      "timestamp": 1760617253818
+    },
+    {
+      "type": "info",
+      "timestamp": 1760617272235
+    }
+  ],
+  "user2": [
+    {
+      "type": "info",
+      "timestamp": 1760617253818
+    },
+    {
+      "type": "info",
+      "timestamp": 1760617253818
+    }
+  ],
+  "user3": [
+    {
+      "type": "info",
+      "timestamp": 1760617253818
+    },
+    {
+      "type": "info",
+      "timestamp": 1760617272235
+    }
+  ]
+}

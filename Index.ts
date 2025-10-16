@@ -14,12 +14,16 @@ async function main(): Promise<void> {
 
   await loader.initialize();
 
-  const notificationService = new NotificationService(gateway, validator, memory);
+  const notificationService = new NotificationService(gateway, validator, memory, writer);
 
-  notificationService.send("info", "user1", "Hello!");
-  notificationService.send("info", "user1", "Second message");
-  notificationService.send("info", "user1", "Third message");
-  notificationService.send("info", "user1", "Fourth message", true);
+    notificationService.send("info", "user1", "Hello!");
+    notificationService.send("info", "user1", "Second message");
+    notificationService.send("info", "user1", "Third message");
+    notificationService.send("info", "user1", "Fourth message", true);
+    notificationService.send("info", "user2", "Hello!");
+    notificationService.send("info", "user2", "Second message");
+    notificationService.send("info", "user2", "Third message");
+    notificationService.send("info", "user3", "Fourth message", true);
 }
 
 main().catch(error => {
